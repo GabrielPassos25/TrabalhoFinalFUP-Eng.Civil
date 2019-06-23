@@ -60,10 +60,10 @@ def ler_frota2018():
 #HABITANTES POR 1000 VEICULOS OU AUTOMOVEIS
 def hab_por_1000():
     for i in range(len(populacao)):
-        automoveis_calculo = int(populacao[i])/(int(automoveis[i])/1000) 
-        habitantes_1000_automoveis.append(automoveis_calculo)
-        veiculos_calculo = int(populacao[i])/(int(veiculos[i])/1000)
-        habitantes_1000_veiculos.append(veiculos_calculo)
+        automoveis_calculo = int(automoveis[i])/(int(populacao[i])/1000) 
+        habitantes_1000_automoveis.append("{:.1f}".format(automoveis_calculo))
+        veiculos_calculo = int(frota_total[i])/(int(populacao[i])/1000)
+        habitantes_1000_veiculos.append("{:.1f}".format(veiculos_calculo))
 
 def dicionarios():
     for i in range(len(populacao)):
@@ -99,7 +99,7 @@ def motocicletas():
 def percentual_motocicletas():
     for i in range(len(populacao)):
         porcentagem = (int(motocicletas_individual[i])*100)/int(total_motocicletas_lista[0])
-        percentual.append(porcentagem)
+        percentual.append("{:.1f}".format(porcentagem))
 def dicionario_motocicletas():
     for i in range(len(populacao)):
         maiores_motocicletas_individual = {}
@@ -150,9 +150,9 @@ def ler_frota2010():
 def taxa_crescimento():
     for i in range(len(automoveis_2010)):
         percentual = ((int(automoveis[i])*100)/int(automoveis_2010[i]))
-        crescimento.append(percentual)
+        crescimento.append("{:.1f}".format(percentual))
     crescimento_e = ((int(frota_total_automoveis_2018[0])*100)/int(frota_total_automoveis_2010[0]))
-    crescimento_estado.append(crescimento_e)
+    crescimento_estado.append("{:.1f}".format(crescimento_e))
 def dicionario_crescimento():
     for i in range(len(populacao)): 
         maiores_automoveisq4 = {}
@@ -172,28 +172,28 @@ def vinte_maiores_automoveisq4():
 def percentual_populacao_estado():
     for i in range(len(populacao)):
         porcentagem = (int(populacao[i])/int(populacao_estado[0])) * 100
-        percentual_populacao.append(porcentagem)
+        percentual_populacao.append("{:.1f}".format(porcentagem))
     for i in range(len(populacao)):
         porcentagem = (int((automoveis[i]*100))/int((frota_total_automoveis_2018[0])))
-        percentual_automoveis.append(porcentagem)
+        percentual_automoveis.append("{:.1f}".format(porcentagem))
     for i in range(len(onibus)):
         porcentagem = int((onibus[i]*100))/int(frota_total_onibus_2018[0])
-        percentual_onibus.append(porcentagem)
+        percentual_onibus.append("{:.1f}".format(porcentagem))
     for i in range(len(caminhao)):
         porcentagem = int((caminhao[i]*100))/int(frota_total_caminhao_2018[0])
-        percentual_caminhao.append(porcentagem) 
+        percentual_caminhao.append("{:.1f}".format(porcentagem)) 
 def escrever_arquivoq5():
     arquivo = open('resumo_NN_TT.csv','w')
     arquivo.write("QUESTÃO 5\n")
     arquivo.write("NOME,POPULAÇÃO,POPULAÇÃO/ESTADO,AUTOMÓVEIS2018,AUTOMÓVEIS/ESTADO,ÔNIBUS2018,ÔNIBUS/ESTADO,CAMINHÃO2018,CAMINHÃO/ESTADO\n")
     for i in range(len(populacao)):
-        arquivo.write(str(municipio_populacao[i]) + "," + str(populacao[i]) + "," + str(percentual_populacao[i]) + "," + str(automoveis[i]) + "," + str(percentual_automoveis[i]) + "," + str(onibus[i]) + "," + str(percentual_onibus[i]) + "," + str(caminhao[i]) + "," + str(percentual_caminhao[i]) +","+"\n")
+        arquivo.write(str(municipio_populacao[i]) + "," + str(populacao[i]) + "," + str(percentual_populacao[i]) + "%" + "," + str(automoveis[i]) + "," + str(percentual_automoveis[i])+"%" + "," + str(onibus[i]) + "," + str(percentual_onibus[i]) +"%"+ "," + str(caminhao[i]) + "," + str(percentual_caminhao[i])+"%" +","+"\n")
     arquivo.close()
 #GERAL
 def escrever_arquivo():
     arquivo = open('resultado_NN_TT.txt','w')
     arquivo.write("QUESTÃO 1:\n")
-    arquivo.write("NOME,POPULAÇÃO,TOTAL,HABITANTES/1000VEÍCULOS,AUTOMÓVEIS,HABITANTES/1000AUTOMÓVEIS\n")
+    arquivo.write("NOME,POPULAÇÃO,TOTAL,VEÍCULOS/1000HABITANTES,AUTOMÓVEIS,AUTOMÓVEIS/1000HABITANTES\n")
     for i in range(len(maiores_correto)):
         arquivo.write(str(maiores_correto[i]['nome']) + "," + str(maiores_correto[i]['populacao']) + "," + str(maiores_correto[i]['frota_total2018']) + "," + str(maiores_correto[i]['habitantes_por_1000veículos']) +"%"+ "," + str(maiores_correto[i]['frota_automoveis2018']) + "," + str(maiores_correto[i]['habitantes_por_1000automóveis'])+"%" +"\n")
     arquivo.write("\nQUESTÃO 2:\n")
@@ -201,7 +201,7 @@ def escrever_arquivo():
     for i in range(len(maiores_motocicletas_organizado)):
         arquivo.write(str(maiores_motocicletas_organizado[i]['nome'] + "," + str(maiores_motocicletas_organizado[i]['frota_total2018']) + "," + str(maiores_motocicletas_organizado[i]['frota_de_motocicletas']) + "," + str(maiores_motocicletas_organizado[i]['percentual']) + "%" +"\n"))
     arquivo.write("\nQUESTÃO 3:\n")
-    arquivo.write("NOME,POPULAÇÃO,AUTOMÓVEIS,HABITANTES/1000AUTOMÓVEIS\n")
+    arquivo.write("NOME,POPULAÇÃO,AUTOMÓVEIS,AUTOMÓVEIS/1000HABITANTES\n")
     for i in range(len(maiores_automoveis1000)):
         arquivo.write(str(maiores_automoveis1000[i]['nome'] + "," + str(maiores_automoveis1000[i]['frota_total2018']) + "," + str(maiores_automoveis1000[i]['frota_de_automoveis']) + "," + str(maiores_automoveis1000[i]['hab_por_1000']) + "%" +"\n"))
     arquivo.write("\nQUESTÃO 4:\n")
